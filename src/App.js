@@ -31,7 +31,6 @@ export default function MyTabs() {
   const [ isMobile, setIsMobile ] = useState();
 
   useScreenMediaQuery("(max-width: 639px)", (matched) => setIsMobile(matched))
-  console.log(isMobile)
 
   return (
     <div className='w-full text-slate-100'>
