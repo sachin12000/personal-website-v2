@@ -30,7 +30,7 @@ export default function MyTabs() {
   const [ visibleSection, setVisibleSection ] = useState(tabData[0].id);
   const [ isMobile, setIsMobile ] = useState();
 
-  useScreenMediaQuery("(max-width: 640px)", (matched) => setIsMobile(matched))
+  useScreenMediaQuery("(max-width: 639px)", (matched) => setIsMobile(matched))
   console.log(isMobile)
 
   return (
