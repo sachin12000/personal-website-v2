@@ -27,7 +27,7 @@ const ContentWrapper = (props) => {
         flexParams.push('items-center');
     }
 
-    let classNames = "min-h-screen py-10 sm:p-0 sm:ml-24 md:ml-32 lg:ml-64 bg-slate-700";
+    let classNames = "min-h-screen pb-14 sm:ml-24 md:ml-32 lg:ml-64 bg-slate-700";
     if (flexParams.length > 0) {
         classNames = combineClasses(classNames, ...flexParams, 'flex');
     }
