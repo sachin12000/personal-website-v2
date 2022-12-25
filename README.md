@@ -1,1 +1,1 @@
-My personal webiste. Created with React and tailwindcss.
+My personal webiste. Created with React and tailwindcss. Responsive design that works on any device.
