@@ -9,16 +9,13 @@ const useScreenMediaQuery = (mediaQuery, eventHandler) => {
     useEffect(() => {
         const watcher = window.matchMedia(mediaQuery);
         const listener = (e) => { if (eventHandler) {eventHandler(e.matches)} };
-        // const listener = (matches) => {  console.log(matches) };
         if (watcher.addEventListener) {
-            // console.log("hooked")
           watcher.addEventListener("change", listener);
         } else {
           watcher.addListener(listener);
         }
         listener(watcher);  // pass the initial matching state to the handler
         return () => {
-            // console.log('unhooked')
           if (watcher.removeEventListener) {
             return watcher.removeEventListener("change", listener);
           } else {
