@@ -20,7 +20,7 @@ const Skills = () => {
                         </li>
                         <li>
                             Create beautiful front-ends by combining { jsYellowText } with techonologies such as&nbsp;
-                            { reactTealText }, { createColoredSpan('tailwindcss', 'text-tailwind-blue') },&nbsp;
+                            { reactTealText }, { createColoredSpan('TailWindCSS', 'text-tailwind-blue') },&nbsp;
                             { createColoredSpan('Bootstrap', 'text-bootstrap-purple') }.
                         </li>
                         <li>
@@ -63,7 +63,7 @@ const Skills = () => {
                             &nbsp;devices.
                         </li>
                         <li>
-                            Ability to diagnose problems using tools such as { createColoredSpan("multimeters", hardwareCyan) } and&nbsp;
+                            Ability to diagnose hardware problems using tools such as { createColoredSpan("multimeters", hardwareCyan) } and&nbsp;
                             { createColoredSpan("oscilloscopes", hardwareCyan) }.
                         </li>
                     </ul>
