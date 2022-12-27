@@ -17,7 +17,7 @@ const Navbar = (props) => {
 
     // scrolls to the selected content and closes the navbar menu if its open
     const handleTabClick = (id) => {
-        if (navBarOpen) setNavBarOpen(false);
+        if (mobile && navBarOpen) setNavBarOpen(false);
         const y = document.getElementById(id).offsetTop;
         window.scrollTo({
             top: y,
@@ -44,12 +44,14 @@ const Navbar = (props) => {
                     className={({selected}) => selected ? tabSelected : tabUnselected}
                     onClick={() => handleTabClick(tab.id)}
                     >
+                        { tab.icon ? <tab.icon className='absolute ml-4' size={tab.iconSize ? tab.iconSize : 20}/> : null }
                         {tab.text}
                 </Tab>
             )}
             </Tab.List>
         </Tab.Group>);
 
+    // no need for the header of the navbar if the it's not mobile
     if (!mobile)
         return navTabs;
     else
