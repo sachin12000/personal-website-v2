@@ -10,31 +10,31 @@ import Footer from './components/Footer';
 import useScreenMediaQuery from './useScreenMediaQuery';
 
 const tabData = [{
-  id: 'home',
-  text: 'Home'
-}, {
-  id: 'aboutme',
-  text: 'About Me'
-}, {
-  id: 'skills',
-  text: 'Skills'
-}, {
-  id: 'projects',
-  text: 'Projects'
-}, {
-  id: 'contactme',
-  text: 'Contact Me'
-}];
+    id: 'home',
+    text: 'Home'
+  }, {
+    id: 'aboutme',
+    text: 'About Me'
+  }, {
+    id: 'skills',
+    text: 'Skills'
+  }, {
+    id: 'projects',
+    text: 'Projects'
+  }, {
+    id: 'contactme',
+    text: 'Contact Me'
+  }
+];
 
 export default function MyTabs() {
   const [ visibleSection, setVisibleSection ] = useState(tabData[0].id);
   const [ isMobile, setIsMobile ] = useState();
 
-  useScreenMediaQuery("(max-width: 639px)", (matched) => setIsMobile(matched))
-
+  useScreenMediaQuery("(min-width: 640px)", (matched) => setIsMobile(!matched))
   return (
     <div className='w-full text-slate-100'>
-      <nav className="fixed top-0 left-0 z-10 w-screen sm:w-24 sm:h-screen md:w-32 lg:w-64">
+      <nav className="fixed top-0 left-0 z-10 w-screen sm:w-40 lg:w-44 xl:w-64 2xl:w-72 sm:h-screen">
         <Navbar mobile={isMobile} items={tabData} selectedTab={visibleSection} />
       </nav>
       <ContentWrapper id="home" setVisibility={setVisibleSection} justifyContentCenter alignItemsCenter mobile={isMobile}>

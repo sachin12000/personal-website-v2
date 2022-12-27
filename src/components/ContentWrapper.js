@@ -27,7 +27,7 @@ const ContentWrapper = (props) => {
         flexParams.push('items-center');
     }
 
-    let classNames = "min-h-screen pb-14 sm:ml-24 md:ml-32 lg:ml-64 bg-slate-700";
+    let classNames = "min-h-screen pb-14 sm:ml-40 lg:ml-44 xl:ml-64 2xl:ml-72 bg-slate-700";
     if (mobile) classNames = combineClasses(classNames, "pt-12");
     if (flexParams.length > 0) {
         classNames = combineClasses(classNames, ...flexParams, 'flex');
