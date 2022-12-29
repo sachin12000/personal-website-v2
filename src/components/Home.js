@@ -7,7 +7,7 @@ const Home = () => {
                 <span>BSC. </span><br className="lg:hidden"/>
                 <span>Software Engineering </span><br className="lg:hidden"/>
                 <span>& </span><br className="lg:hidden"/>
-                <span>Mangement</span></h2>
+                <span>Management</span></h2>
             <h2 className="text-3xl sm:text-5xl text-stone-200 font-light sm:font-extralight">McMaster University</h2>
         </div>
     );
