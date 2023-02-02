@@ -8,7 +8,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import ContactMe from './components/ContactMe';
 import Footer from './components/Footer';
-import useScreenMediaQuery from './useScreenMediaQuery';
+import { useScreenMediaQuery } from './hooks';
 
 import { BsFillHouseFill, BsFillInfoSquareFill, BsTelephoneForwardFill, BsTerminalFill } from 'react-icons/bs';
 import { DiJsBadge } from 'react-icons/di';
