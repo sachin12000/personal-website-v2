@@ -8,8 +8,8 @@ const Navbar = (props) => {
     const [navBarOpen, setNavBarOpen] = useState(false);
     const tabRef = useRef();
 
-    const tabClasses = 'h-12 text-sm font-medium leading-5 text-slate-700 focus:outline-1';
-    const tabUnselected = combineClasses(tabClasses, 'hover:bg-slate-200 hover:text-slate-900');
+    const tabClasses = 'h-12 text-sm font-medium leading-5 focus:outline-1';
+    const tabUnselected = combineClasses(tabClasses, 'text-slate-700 hover:bg-slate-200 hover:text-slate-900');
     const tabSelected = combineClasses(tabClasses, 'outline-none bg-slate-700 text-white shadow');
 
     const itemsObj = {}; // map of tabID to tab index. used for setting active tab during scroll
