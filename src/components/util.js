@@ -7,3 +7,9 @@
 export const combineClasses = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }
+
+// calls the specified callback if it is defined
+export const callbackCaller = (callback, ...args) => {
+    if (callback)
+        callback(...args)
+}
