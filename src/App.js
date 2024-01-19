@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import ContentWrapper from './components/ContentWrapper';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
-import AboutMe from './components/AboutMe';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import ContactMe from './components/ContactMe';
-import Footer from './components/Footer';
+import Home from './pages/Home';
+import AboutMe from './pages/AboutMe';
+import Skills from './pages/Skills';
+import Projects from './pages/Projects';
+import ContactMe from './pages/ContactMe';
+import Footer from './pages/Footer';
 import { useScreenMediaQuery } from './hooks';
 
 import { BsFillHouseFill, BsFillInfoSquareFill, BsTelephoneForwardFill, BsTerminalFill } from 'react-icons/bs';

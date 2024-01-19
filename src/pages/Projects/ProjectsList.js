@@ -1,4 +1,4 @@
-import github from '../assets/icons/github-mark-white.svg';
+import github from '../../assets/icons/github-mark-white.svg';
 
 import * as images from './ProjectsListImageImports';
 

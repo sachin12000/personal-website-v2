@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 
-import Card from './Card.js';
-import ImageViewer from './ImageViewer.js';
-import FixedContainer from './FixedContainer.js';
+import Card from '../../components/Card.js';
+import ImageViewer from '../../components/ImageViewer.js';
+import FixedContainer from '../../components/FixedContainer.js';
 
 import projectsList from './ProjectsList.js';
 

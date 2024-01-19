@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { callbackCaller } from './util';
 
-import './ImageCarousel.css';
+import './styles/ImageCarousel.css';
 
 const arrowGraphic = <span
     className="transition-colors inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60"
