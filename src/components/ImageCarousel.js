@@ -46,6 +46,33 @@ const ImageCarousel = ({ imageData, selectedImageId, onClick, onNext: onNextCall
     });
     const [slideDirection, setSlideDirection] = useState('left');
 
+    const [imageDataWithLoadedAttr, setImageDataWithLoadedAttr] = useState();
+
+    const updateLoadedArray = (imageId, imageDataWithLoadedAttr) => {
+        if (imageDataWithLoadedAttr.allLoaded)
+            return;
+
+        let allLoaded = true;
+        const imagesArray = [];
+
+        imageDataWithLoadedAttr.images.forEach(({ image, loaded }, i) => {
+            const imageObject = { image };
+            if (image.id === imageId) {
+                imageObject.loaded = true;
+            } else {
+                imageObject.loaded = loaded;
+            }
+            imagesArray[i] = imageObject;
+            if (!loaded)
+                allLoaded = false;
+        });
+
+        return {
+            images: imagesArray,
+            allLoaded
+        };
+    }
+
     // go to the next image in the carousel
     const onNext = (e) => {
         e.stopPropagation();
@@ -54,6 +81,7 @@ const ImageCarousel = ({ imageData, selectedImageId, onClick, onNext: onNextCall
             const newImageOnDisplay = imageOnDisplay === maxIndex ? 0 : imageOnDisplay + 1; // index of the next image
             const newPreviousImage = imageOnDisplay; // index of the previous image that will be slid out of view
             setImagesOnDisplay([newImageOnDisplay, newPreviousImage]);
+            setImageDataWithLoadedAttr(updateLoadedArray(imageData[newImageOnDisplay].id, imageDataWithLoadedAttr));
             setSlideDirection('left');
             callbackCaller(onNextCallback, imageData[newImageOnDisplay].id);
         } else {
@@ -69,6 +97,7 @@ const ImageCarousel = ({ imageData, selectedImageId, onClick, onNext: onNextCall
             const newImageOnDisplay = imageOnDisplay === 0 ? maxIndex : imageOnDisplay - 1;
             const newPreviousImage = imageOnDisplay;
             setImagesOnDisplay([newImageOnDisplay, newPreviousImage]);
+            setImageDataWithLoadedAttr(updateLoadedArray(imageData[newImageOnDisplay].id, imageDataWithLoadedAttr));
             setSlideDirection('right');
             callbackCaller(onPrevCallback, imageData[newImageOnDisplay].id);
         } else {
@@ -99,33 +128,69 @@ const ImageCarousel = ({ imageData, selectedImageId, onClick, onNext: onNextCall
         }
     }, [selectedImageId, imagesOnDisplay, imageData]);
 
+    // constructs an array of unfetched image ids. used for lazy loading
+    useEffect(() => {
+        if (imageData.length === 0) {
+            setImageDataWithLoadedAttr([]);
+        } else {
+            setImageDataWithLoadedAttr({
+                images: imageData.map((image) => {
+                    return {
+                        image,
+                        loaded: false,
+                    }
+                }),
+                allLoaded: false
+            });
+        }
+    }, [imageData]);
+
+    useEffect(() => {
+        const currentImageId = selectedImageId ? selectedImageId : imageData[0].id;
+        const imageArray =
+            imageDataWithLoadedAttr ? imageDataWithLoadedAttr :
+                {
+                    images: imageData.map((image) => {
+                        return {
+                            image,
+                            loaded: image.id === currentImageId
+                        }
+                    }),
+                    allLoaded: false
+                };
+        setImageDataWithLoadedAttr(updateLoadedArray(currentImageId, imageArray));
+    }, [selectedImageId]);
+
     const isFirstRender = imagesOnDisplay[0] === imagesOnDisplay[1];
-    const images = Array.isArray(imageData) ?
-        imageData.map(({ id: imageId, image, alt }, i) => {
-            const [indexOfImageOnDisplay, indexOfPreviousImage] = imagesOnDisplay;
-            if (i === indexOfImageOnDisplay)
-                return isFirstRender ? // do not enable animations if this is the first render
-                    <CarouselImage key={imageId} image={image} alt={alt} visible={true} /> :
-                    <CarouselImage
-                        key={imageId}
-                        image={image}
-                        alt={alt}
-                        visible={true} // do not enable animations if this is the first render
-                        slideIn={true}
-                        slideDirection={slideDirection}
-                    />;
-            else if (i === indexOfPreviousImage)
-                return <CarouselImage
+    const [indexOfImageOnDisplay, indexOfPreviousImage] = imagesOnDisplay;
+
+    const images = imageDataWithLoadedAttr ? imageDataWithLoadedAttr.images.map((data, i) => {
+        if (!data.loaded)
+            return null;
+        const { id: imageId, image, alt } = data.image;
+        if (i === indexOfImageOnDisplay)
+            return isFirstRender ? // do not enable animations if this is the first render
+                <CarouselImage key={imageId} image={image} alt={alt} visible={true} /> :
+                <CarouselImage
                     key={imageId}
                     image={image}
                     alt={alt}
-                    visible={true}
-                    slideIn={false} // indicate slide out
+                    visible={true} // do not enable animations if this is the first render
+                    slideIn={true}
                     slideDirection={slideDirection}
                 />;
-            else
-                return <CarouselImage key={imageId} image={image} alt={alt} />;
-        }) : null;
+        else if (i === indexOfPreviousImage)
+            return <CarouselImage
+                key={imageId}
+                image={image}
+                alt={alt}
+                visible={true}
+                slideIn={false} // indicate slide out
+                slideDirection={slideDirection}
+            />;
+        else
+            return <CarouselImage key={imageId} image={image} alt={alt} />;
+    }) : null;
 
     return <div
         className='relative w-full aspect-[2] flex items-center justify-center overflow-clip'
